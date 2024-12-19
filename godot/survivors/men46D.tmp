@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://tjvhrra6pof8"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_j7bru"]
+[ext_resource type="Texture2D" uid="uid://dyufpdepkinfc" path="res://resources/grass.png" id="1_pofvf"]
+[ext_resource type="Script" path="res://scripts/node_2d.gd" id="2_54dae"]
+[ext_resource type="Script" path="res://scripts/control.gd" id="4_hdt18"]
+[ext_resource type="Script" path="res://scripts/timer.gd" id="4_pgxhw"]
+[ext_resource type="Texture2D" uid="uid://brduxhl0lfgwu" path="res://resources/alexander.png" id="5_1dgxs"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="5_1ytof"]
+[ext_resource type="Script" path="res://enemy.gd" id="6_3513o"]
+[ext_resource type="Texture2D" uid="uid://c52qyx35edetm" path="res://resources/bug.png" id="6_ymf1t"]
+[ext_resource type="Script" path="res://healthbar.gd" id="9_s3835"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy82c"]
+radius = 43.0
+height = 132.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njbdn"]
+radius = 25.1672
+height = 85.3495
+
+[node name="Node" type="Node"]
+script = ExtResource("1_j7bru")
+
+[node name="Game" type="Node2D" parent="."]
+script = ExtResource("2_54dae")
+
+[node name="Grass" type="Sprite2D" parent="Game"]
+position = Vector2(687, 413)
+scale = Vector2(0.913889, 0.913889)
+texture = ExtResource("1_pofvf")
+region_rect = Rect2(752, 464.667, 190.667, 88)
+
+[node name="Timer" type="Timer" parent="Game"]
+script = ExtResource("4_pgxhw")
+
+[node name="HealthBar" type="ColorRect" parent="Game"]
+offset_right = 1151.0
+offset_bottom = 18.0
+color = Color(1, 0, 0, 1)
+script = ExtResource("9_s3835")
+
+[node name="Hero" type="CharacterBody2D" parent="Game"]
+position = Vector2(386, 416)
+scale = Vector2(1, 1)
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("5_1ytof")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Hero"]
+shape = SubResource("CapsuleShape2D_fy82c")
+
+[node name="Alexander" type="Sprite2D" parent="Game/Hero"]
+scale = Vector2(0.188213, 0.188213)
+texture = ExtResource("5_1dgxs")
+
+[node name="Enemy" type="CharacterBody2D" parent="Game"]
+position = Vector2(895, 413)
+scale = Vector2(0.913889, 0.913889)
+collision_layer = 2
+script = ExtResource("6_3513o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemy"]
+shape = SubResource("CapsuleShape2D_njbdn")
+
+[node name="Bug" type="Sprite2D" parent="Game/Enemy"]
+position = Vector2(1.09423, 4.37691)
+scale = Vector2(1, 1)
+texture = ExtResource("6_ymf1t")
+
+[node name="Menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_hdt18")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 287.0
+offset_right = 681.0
+offset_bottom = 364.0
+theme_override_font_sizes/font_size = 50
+text = "START"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="gameOver" from="." to="Game" method="game_over"]
+[connection signal="gameOver" from="." to="Menu" method="game_over"]
+[connection signal="startGame" from="." to="Game" method="start_game"]
+[connection signal="startGame" from="." to="Game/Timer" method="start_game"]
+[connection signal="startGame" from="." to="Menu" method="start_game"]
+[connection signal="startGame" from="." to="Game/HealthBar" method="start_game"]
+[connection signal="timeout" from="Game/Timer" to="." method="game_over"]
+[connection signal="gameOver" from="Game/HealthBar" to="." method="game_over"]
+[connection signal="dealDamage" from="Game/Enemy" to="Game/HealthBar" method="health_changed"]
+[connection signal="pressed" from="Menu/Button" to="." method="start_game"]
