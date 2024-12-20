@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 const SPEED = 50.0
 const DPS = 75.0
+
 signal dealDamage(amount)
-var primary = true
 
 @onready
 var hero = get_node('../Hero')

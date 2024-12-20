@@ -12,11 +12,11 @@ func _physics_process(delta):
 	if leftright:
 		velocity.x = leftright * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = 0
 	var updown = Input.get_axis("ui_up", "ui_down")
 	if updown:
 		velocity.y = updown * SPEED
 	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity.y = 0
 	velocity = SPEED * velocity.normalized()
 	var collision_info = move_and_collide(velocity * delta)
