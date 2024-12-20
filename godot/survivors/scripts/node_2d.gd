@@ -1,5 +1,6 @@
 extends Node2D
 
+const STARTING_WEAPON = "Sword"
 @onready
 var hero = get_node("Hero")
 @onready
@@ -11,6 +12,8 @@ var enemyStart = enemy.transform
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var weapon = get_node("Hero/" + STARTING_WEAPON)
+	weapon.enable()
 	pass # Replace with function body.
 
 
