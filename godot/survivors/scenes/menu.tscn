@@ -1,31 +1,27 @@
-[gd_scene load_steps=15 format=3 uid="uid://tjvhrra6pof8"]
+[gd_scene load_steps=13 format=3 uid="uid://tjvhrra6pof8"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_j7bru"]
 [ext_resource type="Texture2D" uid="uid://dyufpdepkinfc" path="res://resources/grass.png" id="1_pofvf"]
-[ext_resource type="Script" path="res://scripts/node_2d.gd" id="2_54dae"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="2_i2sme"]
+[ext_resource type="PackedScene" uid="uid://jybkiicf25ma" path="res://scenes/enemy.tscn" id="3_4v1f2"]
 [ext_resource type="Script" path="res://scripts/control.gd" id="4_hdt18"]
 [ext_resource type="Script" path="res://scripts/timer.gd" id="4_pgxhw"]
 [ext_resource type="Texture2D" uid="uid://brduxhl0lfgwu" path="res://resources/alexander.png" id="5_1dgxs"]
-[ext_resource type="Script" path="res://character_body_2d.gd" id="5_1ytof"]
-[ext_resource type="Script" path="res://enemy.gd" id="6_3513o"]
-[ext_resource type="Texture2D" uid="uid://c52qyx35edetm" path="res://resources/bug.png" id="6_ymf1t"]
-[ext_resource type="Script" path="res://sword.gd" id="8_murq6"]
+[ext_resource type="Script" path="res://scripts/hero.gd" id="6_ontpq"]
+[ext_resource type="Script" path="res://scripts/sword.gd" id="8_murq6"]
 [ext_resource type="Texture2D" uid="uid://bupw34e32rndd" path="res://resources/sword.png" id="9_ijg8r"]
-[ext_resource type="Script" path="res://healthbar.gd" id="9_s3835"]
+[ext_resource type="Script" path="res://scripts/healthbar.gd" id="9_s3835"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy82c"]
 radius = 43.0
 height = 132.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njbdn"]
-radius = 25.1672
-height = 85.3495
-
 [node name="Node" type="Node"]
 script = ExtResource("1_j7bru")
 
 [node name="Game" type="Node2D" parent="."]
-script = ExtResource("2_54dae")
+script = ExtResource("2_i2sme")
+enemyScene = ExtResource("3_4v1f2")
 
 [node name="Grass" type="Sprite2D" parent="Game"]
 position = Vector2(687, 413)
@@ -46,7 +42,7 @@ script = ExtResource("9_s3835")
 position = Vector2(386, 416)
 collision_mask = 0
 motion_mode = 1
-script = ExtResource("5_1ytof")
+script = ExtResource("6_ontpq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Hero"]
 shape = SubResource("CapsuleShape2D_fy82c")
@@ -69,20 +65,6 @@ position = Vector2(-8.25073, -231.442)
 polygon = PackedVector2Array(-5.74927, 104.442, -3.74927, -15.5576, 12.2507, -39.5576, 24.2507, -15.5576, 24.2507, 104.442, 44.2507, 108.442, 44.2507, 120.442, 22.2507, 124.442, 22.2507, 136.442, 12.2507, 144.442, 0.250732, 138.442, -3.74927, 122.442, -17.7493, 120.442, -23.7493, 114.442, -17.7493, 106.442)
 
 [node name="Timer" type="Timer" parent="Game/Hero/Sword"]
-
-[node name="Enemy" type="CharacterBody2D" parent="Game"]
-position = Vector2(895, 413)
-scale = Vector2(0.913889, 0.913889)
-collision_layer = 2
-collision_mask = 5
-script = ExtResource("6_3513o")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemy"]
-shape = SubResource("CapsuleShape2D_njbdn")
-
-[node name="Bug" type="Sprite2D" parent="Game/Enemy"]
-position = Vector2(1.09423, 4.37691)
-texture = ExtResource("6_ymf1t")
 
 [node name="Menu" type="Control" parent="."]
 visible = false
@@ -109,8 +91,8 @@ metadata/_edit_use_anchors_ = true
 [connection signal="startGame" from="." to="Game/Timer" method="start_game"]
 [connection signal="startGame" from="." to="Game/HealthBar" method="start_game"]
 [connection signal="startGame" from="." to="Menu" method="start_game"]
-[connection signal="timeout" from="Game/Timer" to="." method="game_over"]
+[connection signal="heroDamaged" from="Game" to="Game/HealthBar" method="health_changed"]
+[connection signal="timeout" from="Game/Timer" to="Game" method="spawn"]
 [connection signal="gameOver" from="Game/HealthBar" to="." method="game_over"]
 [connection signal="timeout" from="Game/Hero/Sword/Timer" to="Game/Hero/Sword" method="switch_active"]
-[connection signal="dealDamage" from="Game/Enemy" to="Game/HealthBar" method="health_changed"]
 [connection signal="pressed" from="Menu/Button" to="." method="start_game"]
