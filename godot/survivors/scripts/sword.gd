@@ -2,7 +2,6 @@ extends StaticBody2D
 
 var BASE_ROT_SPEED = 4
 var enabled = false
-var active = false
 var level = 1
 @onready
 var timer:Timer = get_node("Timer")
