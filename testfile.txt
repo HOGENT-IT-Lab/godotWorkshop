@@ -1,4 +1,5 @@
 this is text
 more text
 bla bla
+creating merge conflicts is my passion
 lorem ipsum
