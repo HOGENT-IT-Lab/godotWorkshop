@@ -1,5 +1,7 @@
 # godot workshop
 
+Godot portable: https://godotengine.org/
+
 Current URL for testing purposes: https://hogent-it-lab.github.io/godotWorkshop/slides
 
 <!-- TO DO: see if we can remove the need to append /slides (the name of the markdown/pdf) at the end of the URL -->
