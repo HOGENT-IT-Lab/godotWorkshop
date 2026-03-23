@@ -37,13 +37,13 @@ Heeft iemand een idee wat het meest verkochte spel van 2026 op Steam tot nu toe 
 
 Heeft iemand een idee wat het meest verkochte spel van 2026 op Steam tot nu toe is?
 
-![](./img/bestsellers.png)
+![Bestsellers](./img/bestsellers.png)
 
 ---
 
 # Slay the Spire 2
 ... is volledig in Godot gemaakt!
-![](./img/slaythespire2.jpg)
+![STS2 width:800px](./img/slaythespire2.jpg)
 
 ---
 
