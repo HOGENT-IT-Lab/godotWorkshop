@@ -27,6 +27,25 @@ Jaarlijkse [showcase](https://godotengine.org/showcase/) van Godot games
 
 ---
 
+# En als dat niet overtuigend genoeg is...
+
+Heeft iemand een idee wat het meest verkochte spel van 2026 op Steam tot nu toe is?
+
+---
+
+# En als dat niet overtuigend genoeg is...
+
+Heeft iemand een idee wat het meest verkochte spel van 2026 op Steam tot nu toe is?
+
+![](./img/bestsellers.png)
+---
+
+# Slay the Spire 2
+... is volledig in Godot gemaakt!
+![](./img/slaythespire2.jpg)
+
+---
+
 # Vandaag: Vampire Survivors
 (Maar slechter, we hebben maar 2 uur...)
 
