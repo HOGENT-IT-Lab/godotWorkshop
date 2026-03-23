@@ -38,6 +38,7 @@ Heeft iemand een idee wat het meest verkochte spel van 2026 op Steam tot nu toe 
 Heeft iemand een idee wat het meest verkochte spel van 2026 op Steam tot nu toe is?
 
 ![](./img/bestsellers.png)
+
 ---
 
 # Slay the Spire 2
@@ -199,6 +200,7 @@ var collision_info = move_and_collide(velocity * delta)
 - Sprite2D
 - Sprite en poly weg van middelpunt!
     - Draaien rond midden
+    - Game onzichtbaar
 
 ![bg right width:300px](./img/colliPoly.png)
 
